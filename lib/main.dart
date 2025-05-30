@@ -290,7 +290,14 @@ class TextFieldScreen extends StatelessWidget {
             const TextField(
               decoration: InputDecoration(
                 hintText: 'Nhập từ khóa...',
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                ),
+                // Also apply the rounded corners to focused border
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                  borderSide: BorderSide(color: Colors.blue, width: 2.0),
+                ),
               ),
             ),
             const SizedBox(height: 16),
