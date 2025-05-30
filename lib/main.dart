@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sayhi/thuchanh1_30_5.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.light,
         ),
       ),
-      home: const ComponentsListScreen(),
+      home: const MyHomePage(title: "Navigation"),
     );
   }
 }
@@ -275,8 +276,15 @@ class ImagesScreen extends StatelessWidget {
 }
 
 // TextField Screen
-class TextFieldScreen extends StatelessWidget {
+class TextFieldScreen extends StatefulWidget {
   const TextFieldScreen({super.key});
+
+  @override
+  State<TextFieldScreen> createState() => _TextFieldScreenState();
+}
+
+class _TextFieldScreenState extends State<TextFieldScreen> {
+  String inputText = '';
 
   @override
   Widget build(BuildContext context) {
@@ -287,8 +295,8 @@ class TextFieldScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              decoration: const InputDecoration(
                 hintText: 'Nhập từ khóa...',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(12.0)),
@@ -299,11 +307,20 @@ class TextFieldScreen extends StatelessWidget {
                   borderSide: BorderSide(color: Colors.blue, width: 2.0),
                 ),
               ),
+              onChanged: (value) {
+                setState(() {
+                  inputText = value;
+                });
+              },
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Từ đồng cập nhật để tìm kiếm thời gian thực',
-              style: TextStyle(color: Colors.red),
+            Text(
+              inputText.isEmpty ? 'Đang chờ nhập từ khóa...' : inputText,
+              style: TextStyle(
+                color: inputText.isEmpty ? Colors.red.shade300 : Colors.red,
+                fontWeight:
+                    inputText.isEmpty ? FontWeight.normal : FontWeight.bold,
+              ),
             ),
           ],
         ),
